@@ -8,7 +8,7 @@ pipeline {
             }
             stage('Install Dependencies') {
                 steps {
-                 bat 'set PATH=%PATH%;C:\\Program Files\\nodejs'
+                 bat 'cmd /c set PATH=%PATH%;C:\\Program Files\\nodejs'
                  bat '"C:\\Program Files\\nodejs\\node.exe" -v'
                  bat '"C:\\Program Files\\nodejs\\npm.cmd" -v'
                 }
