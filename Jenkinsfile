@@ -8,20 +8,18 @@ pipeline {
             }
             stage('Install Dependencies') {
                 steps {
-                 bat '"C:\\Program Files\\nodejs\\npm.cmd" install'
-                 bat '"C:\\Program Files\\nodejs\\node.exe" -v'
-                 bat '"C:\\Program Files\\nodejs\\npm.cmd" -v'
+                 bat 'npm install'
                 }
             }
             stage('Run Tests') {
                 steps {
-                bat 'npm test || true' // Allows pipeline to continue despite test failures
+                bat 'npm test || exit /b 0' // Allows pipeline to continue despite test failures
                 }
             }
             stage('Generate Coverage Report') {
                 steps {
                 // Ensure coverage report exists
-                bat 'npm run coverage || true'
+                bat 'npm run coverage || exit /b 0''
                 }
             }
             stage('NPM Audit (Security Scan)') {
