@@ -8,22 +8,22 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
-                bat '"C:\\Program Files\\nodejs\\npm.cmd" install'
+                bat 'npm install'
             }
         }
         stage('Run Tests') {
             steps {
-                bat '"C:\\Program Files\\nodejs\\npm.cmd" test || exit /b 0'
+                bat 'npm test || exit /b 0' // Allows pipeline to continue despite test failures
             }
         }
         stage('Generate Coverage Report') {
             steps {
-                bat '"C:\\Program Files\\nodejs\\npm.cmd" run coverage || exit /b 0'
+                bat 'npm run coverage || exit /b 0'
             }
         }
         stage('NPM Audit (Security Scan)') {
             steps {
-                bat '"C:\\Program Files\\nodejs\\npm.cmd" audit || exit /b 0'
+                bat 'npm audit || exit /b 0' // This will show known CVEs in the output
             }
         }
     }
