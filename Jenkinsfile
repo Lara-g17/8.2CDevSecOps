@@ -3,29 +3,28 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: ' https://github.com/Lara-g17/8.2CDevSecOps.git'
-                }
+                git branch: 'main', url: 'https://github.com/Lara-g17/8.2CDevSecOps.git'
             }
-            stage('Install Dependencies') {
-                steps {
-                 bat 'npm install'
-                }
+        }
+        stage('Install Dependencies') {
+            steps {
+                bat '"C:\\Program Files\\nodejs\\npm.cmd" install'
             }
-            stage('Run Tests') {
-                steps {
-                bat 'npm test || exit /b 0' // Allows pipeline to continue despite test failures
-                }
+        }
+        stage('Run Tests') {
+            steps {
+                bat '"C:\\Program Files\\nodejs\\npm.cmd" test || exit /b 0'
             }
-            stage('Generate Coverage Report') {
-                steps {
-                // Ensure coverage report exists
-                bat 'npm run coverage || exit /b 0''
-                }
+        }
+        stage('Generate Coverage Report') {
+            steps {
+                bat '"C:\\Program Files\\nodejs\\npm.cmd" run coverage || exit /b 0'
             }
-            stage('NPM Audit (Security Scan)') {
-                steps {
-                bat 'npm audit || exit /b 0' // This will show known CVEs in the output
-                }
+        }
+        stage('NPM Audit (Security Scan)') {
+            steps {
+                bat '"C:\\Program Files\\nodejs\\npm.cmd" audit || exit /b 0'
             }
+        }
     }
 }
