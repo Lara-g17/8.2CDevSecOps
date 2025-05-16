@@ -8,22 +8,22 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
-                echo 'npm install'
+                sh 'npm install'
             }
         }
         stage('Run Tests') {
             steps {
-                bat 'npm test || exit /b 0' // Allows pipeline to continue despite test failures
+                sh 'npm test || true' // Allows pipeline to continue despite test failures
             }
         }
         stage('Generate Coverage Report') {
             steps {
-                bat 'npm run coverage || exit /b 0'
+                sh 'npm run coverage || true'
             }
         }
         stage('NPM Audit (Security Scan)') {
             steps {
-                bat 'npm audit || exit /b 0' // This will show known CVEs in the output
+                sh 'npm audit || true' // This will show known CVEs in the output
             }
         }
     }
