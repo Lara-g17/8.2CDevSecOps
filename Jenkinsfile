@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
-                sh 'echo %PATH%'
+                sh 'npm install'
             }
         }
         stage('Run Tests') {
